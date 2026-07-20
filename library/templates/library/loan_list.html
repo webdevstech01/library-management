@@ -1,0 +1,58 @@
+{% extends "library/base.html" %} {% block content %}
+
+<h1>Loans</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Member</th>
+      <th>Borrowed</th>
+      <th>Due</th>
+      <th>Returned</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for loan in loans %}
+
+    <tr>
+      <td>{{ loan.book.title }}</td>
+
+      <td>{{ loan.member.first_name }} {{ loan.member.last_name }}</td>
+
+      <td>{{ loan.borrowed_at }}</td>
+
+      <td>{{ loan.due_date }}</td>
+
+      <td>
+        {% if loan.returned_at %} {{ loan.returned_at }} {% else %} Not returned
+        {% endif %}
+      </td>
+
+      <td>
+        {% if loan.is_returned %}
+        <span class="badge bg-success"> Returned </span>
+
+        {% elif loan.is_overdue %}
+        <span class="badge bg-danger"> Overdue </span>
+
+        {% else %}
+        <span class="badge bg-warning text-dark"> Active </span>
+
+        {% endif %}
+      </td>
+    </tr>
+
+    {% empty %}
+
+    <tr>
+      <td colspan="5" class="text-center">No loans found.</td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
