@@ -43,6 +43,17 @@
 
         {% endif %}
       </td>
+      <td>
+        {% if user.is_staff %} {% if not loan.is_returned %}
+
+        <form method="post" action="{% url 'return_book_html' loan.id %}">
+          {% csrf_token %}
+
+          <button class="btn btn-success btn-sm">Return</button>
+        </form>
+
+        {% endif %} {% endif %}
+      </td>
     </tr>
 
     {% empty %}

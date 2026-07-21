@@ -9,24 +9,71 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="{% url 'home' %}"> Library </a>
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+          Library Management
+        </a>
 
-        <div class="d-flex gap-3">
-          <a class="nav-link text-light" href="{% url 'home' %}">Home</a>
-          <a class="nav-link text-light" href="{% url 'books' %}">Books</a>
-          <a class="nav-link text-light" href="{% url 'members' %}">Members</a>
-          <a class="nav-link text-light" href="{% url 'loans' %}">Loans</a>
+        <div class="d-flex align-items-center gap-2">
+          <a
+            href="{% url 'home' %}"
+            class="btn {% if request.resolver_match.url_name == 'home' %}btn-light text-dark{% else %}btn-dark{% endif %}"
+          >
+            <i class="bi bi-house"></i>
 
+            Home
+          </a>
+
+          <a
+            href="{% url 'books' %}"
+            class="btn {% if request.resolver_match.url_name == 'books' %}btn-light text-dark{% else %}btn-dark{% endif %}"
+          >
+            <i class="bi bi-book"></i>
+
+            Books
+          </a>
+
+          {% if user.is_staff %}
+
+          <a
+            href="{% url 'members' %}"
+            class="btn {% if request.resolver_match.url_name == 'members' %}btn-light text-dark{% else %}btn-dark{% endif %}"
+          >
+            <i class="bi bi-people"></i>
+
+            Members
+          </a>
+
+          <a
+            href="{% url 'loans' %}"
+            class="btn {% if request.resolver_match.url_name == 'loans' %}btn-light text-dark{% else %}btn-dark{% endif %}"
+          >
+            <i class="bi bi-journal-check"></i>
+
+            Loans
+          </a>
+
+          {% endif %}
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
           {% if user.is_authenticated %}
 
-          <span class="navbar-text me-3"> Hello {{ user.username }} </span>
+          <span class="text-light">
+            Hello,
+            <strong>{{ user.username }}</strong>
+          </span>
 
-          <form action="{% url 'logout' %}" method="post" class="d-inline">
+          <form action="{% url 'logout' %}" method="post" class="m-0">
             {% csrf_token %}
 
             <button type="submit" class="btn btn-outline-light">Logout</button>
@@ -34,13 +81,35 @@
 
           {% else %}
 
-          <a class="btn btn-outline-light" href="{% url 'login' %}"> Login </a>
+          <a href="{% url 'login' %}" class="btn btn-outline-light"> Login </a>
 
           {% endif %}
         </div>
       </div>
     </nav>
 
-    <div class="container mt-4">{% block content %} {% endblock %}</div>
+    <div class="container mt-3">
+      {% if messages %} {% for message in messages %}
+
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+      {% endfor %} {% endif %}
+    </div>
+
+    <main class="container mt-4 flex-grow-1">
+      {% block content %} {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-light mt-5 py-4">
+      <div class="container text-center">
+        <p class="mb-1">
+          <strong>Library Management System</strong>
+        </p>
+
+        <small class="text-secondary">
+          Built with Django 6, Django REST Framework and Bootstrap 5
+        </small>
+      </div>
+    </footer>
   </body>
 </html>

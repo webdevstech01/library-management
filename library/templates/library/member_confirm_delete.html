@@ -1,0 +1,21 @@
+{% extends "library/base.html" %} {% block content %}
+
+<h2>Delete Member</h2>
+
+<p>
+  Are you sure you want to delete
+
+  <strong> {{ member.first_name }} {{ member.last_name }} </strong>
+
+  ?
+</p>
+
+<form method="post">
+  {% csrf_token %}
+
+  <button class="btn btn-danger" type="submit">Delete</button>
+
+  <a href="{% url 'members' %}" class="btn btn-secondary"> Cancel </a>
+</form>
+
+{% endblock %}

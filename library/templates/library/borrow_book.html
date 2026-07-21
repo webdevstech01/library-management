@@ -1,0 +1,37 @@
+{% extends "library/base.html" %} {% block content %}
+
+<h2 class="mb-4">Borrow Book</h2>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h4>{{ book.title }}</h4>
+
+    <p>
+      <strong>Author:</strong>
+
+      {{ book.author }}
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+
+      {{ book.category }}
+    </p>
+
+    <p>
+      <strong>Available copies:</strong>
+
+      {{ book.available_copies }}
+    </p>
+  </div>
+</div>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+
+  <button type="submit" class="btn btn-primary">Borrow Book</button>
+
+  <a href="{% url 'books' %}" class="btn btn-secondary"> Cancel </a>
+</form>
+
+{% endblock %}

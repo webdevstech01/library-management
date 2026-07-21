@@ -9,6 +9,17 @@ def borrow_book(member: Member, book: Book) -> Loan:
     if book.available_copies == 0:
         raise ValueError("There are no available copies left.")
 
+    existing_loan = Loan.objects.filter(
+    member=member,
+    book=book,
+    returned_at__isnull=True,
+    ).exists()
+
+    if existing_loan:
+        raise ValueError(
+            "This member already has this book borrowed."
+        )
+
     active_loans = Loan.objects.filter(
         member=member,
         returned_at__isnull=True,

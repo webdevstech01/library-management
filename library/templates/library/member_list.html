@@ -1,6 +1,14 @@
 {% extends "library/base.html" %} {% block content %}
 
-<h1>Members</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Members</h1>
+
+  {% if user.is_staff %}
+
+  <a href="{% url 'add_member' %}" class="btn btn-success mb-3"> Add Member </a>
+
+  {% endif %}
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -9,6 +17,9 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Phone</th>
+      {% if user.is_staff %}
+      <th>Actions</th>
+      {% endif %}
     </tr>
   </thead>
 
@@ -20,6 +31,25 @@
       <td>{{ member.last_name }}</td>
       <td>{{ member.email }}</td>
       <td>{{ member.phone }}</td>
+      <td>
+        {% if user.is_staff %}
+
+        <a
+          href="{% url 'edit_member' member.id %}"
+          class="btn btn-warning btn-sm"
+        >
+          Edit
+        </a>
+
+        <a
+          href="{% url 'delete_member' member.id %}"
+          class="btn btn-danger btn-sm"
+        >
+          Delete
+        </a>
+
+        {% endif %}
+      </td>
     </tr>
 
     {% empty %}

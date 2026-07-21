@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.db.models import PROTECT
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
@@ -24,8 +25,14 @@ class Member(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Loan(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    member = models.ForeignKey(
+    Member,
+    on_delete=models.PROTECT,
+    )
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.PROTECT,
+    )
     borrowed_at = models.DateField(auto_now_add=True)
     due_date = models.DateField()
     returned_at = models.DateField(null=True, blank=True)
