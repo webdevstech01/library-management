@@ -37,6 +37,7 @@ The application allows librarians to manage books, members and loans while enfor
 - View active loans
 - View overdue loans
 - Automatic due date (14 days)
+- Automatic penalties added
 
 ### Authentication
 

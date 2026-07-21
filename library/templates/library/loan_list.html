@@ -11,6 +11,8 @@
       <th>Scadenta</th>
       <th>Returnata</th>
       <th>Status</th>
+      <th>Actiuni</th>
+      <th>Penalitati</th>
     </tr>
   </thead>
 
@@ -53,6 +55,9 @@
         </form>
 
         {% endif %} {% endif %}
+      </td>
+      <td>
+        {% if loan.penalty %} {{ loan.penalty }} RON {% else %} - {% endif %}
       </td>
     </tr>
 

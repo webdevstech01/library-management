@@ -24,6 +24,8 @@ class Member(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+PENALTY_PER_DAY = 1
+
 class Loan(models.Model):
     member = models.ForeignKey(
     Member,
@@ -57,6 +59,17 @@ class Loan(models.Model):
             return "Overdue"
 
         return "Active"
+
+    @property
+    def penalty(self):
+        end_date = self.returned_at or date.today()
+
+        overdue_days = (end_date - self.due_date).days
+
+        if overdue_days <= 0:
+            return 0
+
+        return overdue_days * PENALTY_PER_DAY
 
     def __str__(self):
         return f"{self.member} borrowed {self.book}"
