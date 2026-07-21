@@ -77,3 +77,100 @@ class LoanServiceTests(TestCase):
 
         with self.assertRaises(ValueError):
             borrow_book(self.member, books[3])
+    
+    def test_cannot_borrow_when_no_available_copies(self):
+
+        self.book.available_copies = 0
+        self.book.save()
+
+        with self.assertRaises(Exception):
+
+            borrow_book(
+                self.member,
+                self.book,
+            )
+
+    def test_member_cannot_have_more_than_three_active_loans(self):
+
+        books = []
+
+        for i in range(4):
+
+            books.append(
+                Book.objects.create(
+                    title=f"Book {i}",
+                    author="Author",
+                    isbn=f"12345{i}",
+                    category="Test",
+                    total_copies=1,
+                    available_copies=1,
+                )
+            )
+
+
+        borrow_book(
+            self.member,
+            books[0],
+        )
+
+        borrow_book(
+            self.member,
+            books[1],
+        )
+
+        borrow_book(
+            self.member,
+            books[2],
+        )
+
+
+        with self.assertRaises(Exception):
+
+            borrow_book(
+                self.member,
+                books[3],
+            )
+
+    def test_return_book_increases_available_copies(self):
+
+        loan = borrow_book(
+            self.member,
+            self.book,
+        )
+
+        self.book.refresh_from_db()
+
+        self.assertEqual(
+            self.book.available_copies,
+            4,
+        )
+
+
+        return_book(loan)
+
+
+        self.book.refresh_from_db()
+
+        self.assertEqual(
+            self.book.available_copies,
+            5,
+        )
+    
+    def test_returned_loan_is_not_overdue(self):
+
+        loan = borrow_book(
+            self.member,
+            self.book,
+        )
+
+        return_book(loan)
+
+        loan.refresh_from_db()
+
+        self.assertTrue(
+            loan.is_returned
+        )
+
+        self.assertFalse(
+            loan.is_overdue
+        )

@@ -1,15 +1,15 @@
 {% extends "library/base.html" %} {% block content %}
 
-<h1>Loans</h1>
+<h1>Imprumuturi</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Book</th>
-      <th>Member</th>
-      <th>Borrowed</th>
-      <th>Due</th>
-      <th>Returned</th>
+      <th>Carte</th>
+      <th>Membru</th>
+      <th>Imprumutata la</th>
+      <th>Scadenta</th>
+      <th>Returnata</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -33,13 +33,13 @@
 
       <td>
         {% if loan.is_returned %}
-        <span class="badge bg-success"> Returned </span>
+        <span class="badge bg-success"> Returnata </span>
 
         {% elif loan.is_overdue %}
-        <span class="badge bg-danger"> Overdue </span>
+        <span class="badge bg-danger">Scadenta depasita</span>
 
         {% else %}
-        <span class="badge bg-warning text-dark"> Active </span>
+        <span class="badge bg-warning text-dark"> Activa </span>
 
         {% endif %}
       </td>
@@ -49,7 +49,7 @@
         <form method="post" action="{% url 'return_book_html' loan.id %}">
           {% csrf_token %}
 
-          <button class="btn btn-success btn-sm">Return</button>
+          <button class="btn btn-success btn-sm">Returneaza</button>
         </form>
 
         {% endif %} {% endif %}

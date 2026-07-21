@@ -20,7 +20,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand fw-bold" href="{% url 'home' %}">
-          Library Management
+          Sistem de management biblioteca
         </a>
 
         <div class="d-flex align-items-center gap-2">
@@ -39,7 +39,7 @@
           >
             <i class="bi bi-book"></i>
 
-            Books
+            Carti
           </a>
 
           {% if user.is_staff %}
@@ -50,7 +50,7 @@
           >
             <i class="bi bi-people"></i>
 
-            Members
+            Membrii
           </a>
 
           <a
@@ -59,7 +59,7 @@
           >
             <i class="bi bi-journal-check"></i>
 
-            Loans
+            Imprumuturi
           </a>
 
           {% endif %}
@@ -69,7 +69,7 @@
           {% if user.is_authenticated %}
 
           <span class="text-light">
-            Hello,
+            Salut,
             <strong>{{ user.username }}</strong>
           </span>
 
@@ -103,7 +103,7 @@
     <footer class="bg-dark text-light mt-5 py-4">
       <div class="container text-center">
         <p class="mb-1">
-          <strong>Library Management System</strong>
+          <strong>Sistem de management biblioteca</strong>
         </p>
 
         <small class="text-secondary">

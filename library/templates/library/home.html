@@ -1,9 +1,9 @@
 {% extends "library/base.html" %} {% block content %}
 
 <div class="mb-5">
-  <h1 class="display-5 fw-bold">Library Management System</h1>
+  <h1 class="display-5 fw-bold">Sistem de management biblioteca</h1>
 
-  <p class="text-muted">Welcome to the library dashboard.</p>
+  <p class="text-muted">Bine ai venit!</p>
 </div>
 
 {% if user.is_staff %}
@@ -14,7 +14,7 @@
       <div class="card-body">
         <i class="bi bi-book fs-1 text-primary"></i>
 
-        <h5 class="card-title mt-3">Books</h5>
+        <h5 class="card-title mt-3">Carti</h5>
 
         <h2>{{ books_count }}</h2>
       </div>
@@ -26,7 +26,7 @@
       <div class="card-body">
         <i class="bi bi-people fs-1 text-success"></i>
 
-        <h5 class="card-title mt-3">Members</h5>
+        <h5 class="card-title mt-3">Membrii</h5>
 
         <h2>{{ members_count }}</h2>
       </div>
@@ -38,7 +38,7 @@
       <div class="card-body">
         <i class="bi bi-journal-check fs-1 text-warning"></i>
 
-        <h5 class="card-title mt-3">Active Loans</h5>
+        <h5 class="card-title mt-3">Imprumuturi active</h5>
 
         <h2>{{ active_loans }}</h2>
       </div>
@@ -50,7 +50,7 @@
       <div class="card-body">
         <i class="bi bi-exclamation-circle fs-1 text-danger"></i>
 
-        <h5 class="card-title mt-3">Overdue Loans</h5>
+        <h5 class="card-title mt-3">Imprumuturi restante</h5>
 
         <h2>{{ overdue_loans }}</h2>
       </div>
@@ -62,26 +62,26 @@
 
 <hr class="my-5" />
 
-<h3 class="mb-4">Quick Actions</h3>
+<h3 class="mb-4">Actiuni rapide</h3>
 
 <div class="d-flex flex-wrap gap-3">
   <a href="{% url 'books' %}" class="btn btn-primary">
     <i class="bi bi-book me-2"></i>
 
-    Books
+    Carti
   </a>
   {% if user.is_staff %}
 
   <a href="{% url 'members' %}" class="btn btn-success">
     <i class="bi bi-people me-2"></i>
 
-    Members
+    Membrii
   </a>
 
   <a href="{% url 'loans' %}" class="btn btn-warning text-dark">
     <i class="bi bi-journal-check me-2"></i>
 
-    Loans
+    Imprumuturi
   </a>
   {% endif %}
 </div>

@@ -1,26 +1,17 @@
 from django.urls import path
 
-from .views import (
-    BookListCreateView,
-    BookDetailView,
-    MemberListCreateView,
-    MemberDetailView,
-    BorrowBookView,
-    ReturnBookView,
-    ActiveLoansView,
-    OverdueLoansView,
-)
+from . import api
 
 urlpatterns = [
-    path("books/", BookListCreateView.as_view()),
-    path("books/<int:pk>/", BookDetailView.as_view()),
+    path("books/", api.BookListCreateView.as_view()),
+    path("books/<int:pk>/", api.BookDetailView.as_view()),
 
-    path("members/", MemberListCreateView.as_view()),
-    path("members/<int:pk>/", MemberDetailView.as_view()),
+    path("members/", api.MemberListCreateView.as_view()),
+    path("members/<int:pk>/", api.MemberDetailView.as_view()),
 
-    path("borrow/", BorrowBookView.as_view()),
-    path("return/", ReturnBookView.as_view()),
+    path("borrow/", api.BorrowBookView.as_view()),
+    path("return/", api.ReturnBookView.as_view()),
 
-    path("loans/active/", ActiveLoansView.as_view()),
-    path("loans/overdue/", OverdueLoansView.as_view()),
+    path("loans/active/", api.ActiveLoansView.as_view()),
+    path("loans/overdue/", api.OverdueLoansView.as_view()),
 ]

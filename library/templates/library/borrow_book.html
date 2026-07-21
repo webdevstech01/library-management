@@ -1,25 +1,25 @@
 {% extends "library/base.html" %} {% block content %}
 
-<h2 class="mb-4">Borrow Book</h2>
+<h2 class="mb-4">Imprumuta Carte</h2>
 
 <div class="card mb-4">
   <div class="card-body">
     <h4>{{ book.title }}</h4>
 
     <p>
-      <strong>Author:</strong>
+      <strong>Autor:</strong>
 
       {{ book.author }}
     </p>
 
     <p>
-      <strong>Category:</strong>
+      <strong>Categorie:</strong>
 
       {{ book.category }}
     </p>
 
     <p>
-      <strong>Available copies:</strong>
+      <strong>Copii disponibile:</strong>
 
       {{ book.available_copies }}
     </p>
@@ -29,9 +29,9 @@
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
 
-  <button type="submit" class="btn btn-primary">Borrow Book</button>
+  <button type="submit" class="btn btn-primary">Imprumuta carte</button>
 
-  <a href="{% url 'books' %}" class="btn btn-secondary"> Cancel </a>
+  <a href="{% url 'books' %}" class="btn btn-secondary"> Renunta </a>
 </form>
 
 {% endblock %}

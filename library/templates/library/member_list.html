@@ -1,11 +1,13 @@
 {% extends "library/base.html" %} {% block content %}
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>Members</h1>
+  <h1>Membrii</h1>
 
   {% if user.is_staff %}
 
-  <a href="{% url 'add_member' %}" class="btn btn-success mb-3"> Add Member </a>
+  <a href="{% url 'add_member' %}" class="btn btn-success mb-3">
+    Adauga membru
+  </a>
 
   {% endif %}
 </div>
@@ -13,12 +15,12 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Prenume</th>
+      <th>Nume</th>
       <th>Email</th>
-      <th>Phone</th>
+      <th>Telefon</th>
       {% if user.is_staff %}
-      <th>Actions</th>
+      <th>Actiuni</th>
       {% endif %}
     </tr>
   </thead>
@@ -45,7 +47,7 @@
           href="{% url 'delete_member' member.id %}"
           class="btn btn-danger btn-sm"
         >
-          Delete
+          Sterge
         </a>
 
         {% endif %}
@@ -55,7 +57,7 @@
     {% empty %}
 
     <tr>
-      <td colspan="4" class="text-center">No members found.</td>
+      <td colspan="4" class="text-center">Nu a fost gasit niciun membru.</td>
     </tr>
 
     {% endfor %}

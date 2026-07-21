@@ -2,7 +2,6 @@ from django import forms
 
 from .models import Book, Member
 
-
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
@@ -31,12 +30,8 @@ class BorrowBookForm(forms.Form):
 
     member = forms.ModelChoiceField(
         queryset=Member.objects.all(),
-        empty_label="Select a member",
+        empty_label="Selecteaza un membru",
     )
-
-from django import forms
-
-from .models import Book
 
 
 class BookFilterForm(forms.Form):
@@ -46,7 +41,7 @@ class BookFilterForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Search by title, author, ISBN or category...",
+                "placeholder": "Cauta dupa titlu, autor, ISBN sau categorie...",
             }
         ),
     )
@@ -63,9 +58,9 @@ class BookFilterForm(forms.Form):
     availability = forms.ChoiceField(
         required=False,
         choices=[
-            ("", "All"),
-            ("available", "Available"),
-            ("unavailable", "Unavailable"),
+            ("", "Toate"),
+            ("available", "Disponibile"),
+            ("unavailable", "Indisponibile"),
         ],
         widget=forms.Select(
             attrs={
@@ -89,6 +84,6 @@ class BookFilterForm(forms.Form):
         )
 
         self.fields["category"].choices = [
-            ("", "All Categories"),
+            ("", "Toate categoriile"),
             *[(c, c) for c in categories],
         ]
