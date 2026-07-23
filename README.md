@@ -177,6 +177,5 @@ python manage.py test
 
 - Member accounts
 - Reservations
-- Late return penalties
 - Email notifications
 - Pagination
